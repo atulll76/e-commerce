@@ -122,13 +122,39 @@ Lightweight endpoints used specifically for pipeline testing, repository pattern
 
 ## Running the Application Locally
 
-1. Install dependencies:
+1. **Navigate to the project directory**:
+   ```bash
+   cd c:\project\e-commerce
+   ```
+
+2. **Activate the virtual environment**:
+   * **Windows (PowerShell)**:
+     ```powershell
+     .\venv\Scripts\Activate.ps1
+     ```
+   * **macOS/Linux**:
+     ```bash
+     source venv/bin/activate
+     ```
+
+3. **Install dependencies** (if not already installed):
    ```bash
    pip install -r requirements.txt
    ```
-2. Set up your MySQL database with `sql/ddl.sql` schema and update credentials in database configuration.
-3. Start the FastAPI development server:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-4. Access interactive API documentation at: [http://localhost:8000/docs](http://localhost:8000/docs).
+
+4. **Set up the Database**:
+   Set up your MySQL database with `sql/ddl.sql` schema and update credentials in the database configuration.
+
+5. **Start the FastAPI development server**:
+   * **Local Access Only** (default):
+     ```bash
+     uvicorn app.main:app --reload
+     ```
+   * **Network Exposed** (accessible by other clients/devices on the same network):
+     ```bash
+     uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+     ```
+
+6. **Access the interactive API documentation**:
+   * If running locally: [http://localhost:8000/docs](http://localhost:8000/docs)
+   * If running over the network, replace `localhost` with your machine's local IP address (e.g., `http://192.168.1.5:8000/docs`).

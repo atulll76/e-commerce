@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.routers.verification import router as verification_router
 from app.routers.users import router as users_router
 from app.routers.products import router as products_router
@@ -9,6 +10,16 @@ app = FastAPI(
     description="Backend service demonstrating Async Repository Layer pattern for MySQL",
     version="1.0.0",
 )
+
+# Configure CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 app.include_router(verification_router)
 app.include_router(users_router)
